@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kets Design | Web Design Services</title>
+  <style>
+    :root {
+      --primary-black: #0f0f0f;
+      --secondary-black: #1a1a1a;
+      --accent-color: #00c9ff;
+      --text-color: #ffffff;
+      --secondary-text: #cccccc;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .site {
+      opacity: 0;
+      animation: siteFadeIn 1s forwards;
+      animation-delay: 4s;
+    }
+    @keyframes siteFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #cutscene {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+    #cutscene h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      opacity: 0;
+      position: relative;
+      animation: popUp 1s forwards;
+      color: #fff;
+    }
+    #cutscene h1 .accent {
+      color: var(--accent-color);
+    }
+    #cutscene h1::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      transform: skewX(-25deg);
+      opacity: 0;
+      animation: glint 1s forwards;
+      animation-delay: 1s;
+    }
+    @keyframes popUp {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glint {
+      0% { left: -100%; opacity: 0; }
+      20% { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #003366);
+      background-size: 200% 200%;
+      animation: gradientMove 10s infinite alternate;
+      color: var(--text-color);
+      overflow-x: hidden;
+      position: relative;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+      opacity: 0.15;
+      z-index: -1;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 60px 0;
+    }
+    header {
+      background-color: rgba(15,15,15,0.95);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      transition: all 0.3s ease;
+    }
+    header.scrolled {
+      padding: 10px 0;
+      backdrop-filter: blur(10px);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s;
+    }
+    .logo:hover {
+      animation: bounce 0.5s;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-10px); }
+      50% { transform: translateY(0); }
+      70% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+    .logo h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-left: 10px;
+      text-shadow: 0px 0px 5px rgba(0,201,255,0.6);
+    }
+    .logo span {
+      color: var(--accent-color);
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    .nav-links li {
+      margin-left: 30px;
+    }
+    .nav-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent-color);
+      bottom: -5px;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px rgba(0,201,255,0.7);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--secondary-text);
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.7s;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: var(--accent-color);
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.9s;
+      border: 1px solid rgba(0,201,255,0.5);
+      margin-top: 10px;
+    }
+    .btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,201,255,0.4);
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 50%;
+      height: 100%;
+      background-image: url('https://via.placeholder.com/600x800?text=Hero+GIF');
+      background-size: cover;
+      background-position: center;
+      clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+      opacity: 0.7;
+      z-index: 0;
+      animation: zoomIn 2s ease-out forwards;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.95); opacity: 0.5; }
+      to { transform: scale(1); opacity: 0.7; }
+    }
+    .glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      background-color: var(--accent-color);
+      filter: blur(100px);
+      border-radius: 50%;
+      z-index: 0;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-50%, -60%); }
+      100% { transform: translate(-50%, -50%); }
+    }
+    .services {
+      padding: 100px 0;
+      background-color: var(--secondary-black);
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-title h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 10px rgba(0,201,255,0.6);
+    }
+    .section-title h3::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background-color: var(--accent-color);
+      bottom: -10px;
+      left: 25%;
+    }
+    .section-title p {
+      color: var(--secondary-text);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background-color: var(--primary-black);
+      border-radius: 10px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0;
+      background-color: rgba(0,201,255,0.05);
+      bottom: 0;
+      left: 0;
+      transition: all 0.3s ease;
+      z-index: -1;
+    }
+    .service-card:hover::before {
+      height: 100%;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .service-card h4 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+    }
+    .service-card p {
+      color: var(--secondary-text);
+      margin-bottom: 20px;
+    }
+    .service-card .price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--accent-color);
+    }
+    .service-card .price::after {
+      content: " ";
+      font-size: 0.9rem;
+      color: var(--secondary-text);
+    }
+    .service-card .features {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+    .service-card .features li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+    }
+    .service-card .features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+    }
+    .about {
+      padding: 100px 0;
+      background-color: var(--primary-black);
+    }
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .about-text {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--secondary-text);
+    }
+    .about-img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .faq {
+      background-color: var(--primary-black);
+      padding: 80px 20px;
+    }
+    .faq h3 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 10px rgba(0,201,255,0.6);
+    }
+    .faq-item {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 15px;
+      transition: background 0.3s ease;
+    }
+    .faq-item:hover {
+      background: rgba(0,201,255,0.05);
+    }
+    .faq-item h4 {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      cursor: pointer;
+    }
+    .faq-item p {
+      font-size: 1rem;
+      color: var(--secondary-text);
+      margin-top: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .faq-item.active p {
+      max-height: 500px;
+    }
+    .contact {
+      padding: 100px 0;
+    }
+    .contact-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 50px;
+    }
+    .contact-form {
+      background-color: var(--secondary-black);
+      padding: 30px;
+      border-radius: 10px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-black);
+      border: 1px solid #333;
+      border-radius: 5px;
+      color: var(--text-color);
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-color);
+      outline: none;
+    }
+    .form-group textarea {
+      height: 120px;
+      resize: vertical;
+    }
+    .contact button {
+      padding: 15px;
+      border: none;
+      background: var(--accent-color);
+      color: #000;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .contact button:hover {
+      background: #00b1e6;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .contact-info h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .contact-info p {
+      color: var(--secondary-text);
+      margin-bottom: 30px;
+    }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .contact-method .icon {
+      margin-right: 15px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0,201,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .contact-method .icon svg {
+      color: var(--accent-color);
+    }
+    .contact-method .info {
+      color: var(--secondary-text);
+    }
+    footer {
+      background-color: var(--primary-black);
+      padding: 50px 0 20px;
+      border-top: 1px solid #333;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .footer-logo h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-left: 10px;
+    }
+    .footer-logo span {
+      color: var(--accent-color);
+    }
+    .footer-about p {
+      color: var(--secondary-text);
+      margin-bottom: 20px;
+    }
+    .footer-contact {
+      font-size: 1rem;
+      color: var(--secondary-text);
+    }
+    .footer-contact svg {
+      vertical-align: middle;
+      margin-right: 5px;
+      fill: var(--accent-color);
+    }
+    .footer-links h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    .footer-links h3::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background-color: var(--accent-color);
+      bottom: -10px;
+      left: 0;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: var(--secondary-text);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+      color: var(--secondary-text);
+    }
+    .animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+    .animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div id="cutscene">
+    <h1>Kets<span class="accent">Design</span></h1>
+  </div>
+  <div id="particles-js"></div>
+  <div class="site">
+    <header id="header">
+      <div class="container">
+        <nav>
+          <div class="logo">
+            <h1>Kets<span>Design</span></h1>
+          </div>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content animate">
+          <h2>We Build Websites That <span style="color: var(--accent-color);">Inspire</span></h2>
+          <p>We turn your ideas into websites that look great and work smoothly. Let's create something cool together.</p>
+          <a href="#contact" class="btn">Get Started</a>
+        </div>
+      </div>
+      <div class="hero-img"></div>
+      <div class="glow"></div>
+    </section>
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-title animate">
+          <h3>Our Services</h3>
+          <p>We offer web design services with clear pricing. Choose a simple setup or a full-featured package, and add extras as needed.</p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card animate">
+            <h4>Basic Website</h4>
+            <p>Great for small businesses wanting a simple, clean site.</p>
+            <div class="price">Estimated: $750</div>
+            <ul class="features">
+              <li>5 Pages (@ ~$150/page)</li>
+              <li>Mobile Responsive Design</li>
+              <li>Standard SEO (upgrade available)</li>
+              <li>Keyword Research (add-on: +$50)</li>
+              <li>Google Ads Setup (add-on: +$75)</li>
+              <li>Facebook Integration (add-on: +$50)</li>
+              <li>Jobber Setup (add-on: +$100)</li>
+              <li>CRM Setup (add-on: +$150)</li>
+              <li>Contact Form</li>
+              <li>3 Revisions</li>
+              <li>Extra Page (add-on: +$150/page)</li>
+            </ul>
+            <a href="#contact" class="btn">Get Started</a>
+          </div>
+          <div class="service-card animate">
+            <h4>Premium Website</h4>
+            <p>Perfect for businesses that need more features and a bigger site.</p>
+            <div class="price">Estimated: $1,600</div>
+            <ul class="features">
+              <li>10 Pages (@ ~$200/page)</li>
+              <li>Mobile Responsive Design</li>
+              <li>Advanced SEO (includes basic SEO; upgrades available)</li>
+              <li>Custom Keyword Strategy (add-on: +$75)</li>
+              <li>Google Ads Management (add-on: +$100)</li>
+              <li>Facebook Business Setup (add-on: +$75)</li>
+              <li>Jobber Setup (add-on: +$150)</li>
+              <li>CRM Setup (add-on: +$200)</li>
+              <li>Contact Form</li>
+              <li>5 Revisions</li>
+              <li>Social Media Integration</li>
+              <li>Basic Animations</li>
+              <li>Extra Page (add-on: +$200/page)</li>
+            </ul>
+            <a href="#contact" class="btn">Get Started</a>
+          </div>
+          <div class="service-card animate">
+            <h4>E-Commerce Website</h4>
+            <p>A full solution for selling your products online.</p>
+            <div class="price">Estimated: $3,000+</div>
+            <ul class="features">
+              <li>Unlimited Pages (@ ~$250/page)</li>
+              <li>Mobile Responsive Design</li>
+              <li>Advanced SEO (upgrades available)</li>
+              <li>Comprehensive Keyword Research (add-on: +$100)</li>
+              <li>Product Management System</li>
+              <li>Payment Integration</li>
+              <li>Google Ads Setup (add-on: +$150)</li>
+              <li>Facebook Ads Setup (add-on: +$100)</li>
+              <li>Jobber Setup (add-on: +$200)</li>
+              <li>CRM Setup (add-on: +$250)</li>
+              <li>10 Revisions</li>
+              <li>Advanced Animations</li>
+              <li>1 Year Support</li>
+              <li>Custom Add-ons priced separately</li>
+            </ul>
+            <a href="#contact" class="btn">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about">
+      <div class="container">
+        <div class="section-title animate">
+          <h3>About Us</h3>
+          <p>Find out what drives us to make awesome websites.</p>
+        </div>
+        <div class="about-content animate">
+          <div class="about-text">
+            <p>We are a team that turns your ideas into real websites. We work hard to build sites that look great and run smoothly. Whether you need a basic site or a full-featured platform, we’ve got you covered.</p>
+            <p>Our goal is to create quality websites at a price you can afford. We believe in clear pricing and honest service so you know exactly what you're paying for.</p>
+          </div>
+          <div>
+            <img class="about-img" src="https://media-hosting.imagekit.io//a8d79eb87e844f03/screenshot_1742683513480.png?Expires=1837291514&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=bVyaGPNQO3QBmCAOmFFG9JgM7TsLVdjShvYmF6WIohp1ZfOSY0qsQgwsslj1sYFhoca6ROk3ddLsgnqJcUOE9Ha28fawNO004c3jyKOJ6IsRMYOttF0uUQ~0pOEsuMlCfqbHULCW7XPJ6kgX~5wBdFhJyqFBqA4RGEFfxjQkSEbZDn4d4yRd4GNO7s0MZy~IebZgS-3tVeBDEZF3WGuiRIlCJEhOLA4P8tWq-WGZyOCU2bCnWmuALkaQ2C-QKd01mmHuGXT5UUYJW-tIFqcJFJucuIkuhDF1-tCjktNX91Duu84UdrfbpL~7VeE5C-cu8hK8cXUjbpqZCMfKqYSfrA__" alt="About Us">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="faq">
+      <div class="container">
+        <h3 class="animate">Common Questions</h3>
+        <div class="faq-item animate">
+          <h4>How long does it take to build a website?</h4>
+          <p>A basic website usually takes about 2 to 3 weeks. If you want extra pages or features, it may take a little longer. We take our time to ensure everything is perfect.</p>
+        </div>
+        <div class="faq-item animate">
+          <h4>What if I need extra pages or add-ons?</h4>
+          <p>You can always add extra pages and features like advanced SEO, keyword research, ad setups, and more. Our add-on prices are clearly listed so you know exactly what you're getting.</p>
+        </div>
+        <div class="faq-item animate">
+          <h4>Do you offer support after the website is done?</h4>
+          <p>Yes, we provide support once your website is live. Our e-commerce package even includes one year of support, and we can arrange ongoing maintenance if needed.</p>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title animate">
+          <h3>Get in Touch</h3>
+          <p>Ready to start your project? Contact us for a free consultation.</p>
+        </div>
+        <div class="contact-content">
+          <div class="contact-form animate">
+            <form action="mailto:ketdesignn@outlook.com" method="POST" enctype="text/plain">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+          <div class="contact-info animate">
+            <h3>Contact Information</h3>
+            <p>Feel free to reach out via email or phone. Let's bring your ideas to life.</p>
+            <div class="contact-method">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="info">Phone number not available right now Contact Through Email</div>
+            </div>
+            <div class="contact-method">
+              <div class="icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="info">ketdesignn@outlook.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-about">
+            <div class="footer-logo">
+              <h2>Kets<span>Design</span></h2>
+            </div>
+            <p>We are committed to crafting digital solutions that help your business grow. Reach out to us anytime at:</p>
+            <div class="footer-contact">
+              <svg width="18" height="18" viewBox="0 0 24 24">
+                <path d="M4 4h16v16H4z" fill="none"/>
+                <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+              ketdesignn@outlook.com
+            </div>
+          </div>
+          <div class="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 Kets Design. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": { "enable": true, "value_area": 800 }
+        },
+        "color": { "value": "#00c9ff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5, "random": false },
+        "size": { "value": 3, "random": true },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#00c9ff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out" }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "push": { "particles_nb": 4 },
+          "repulse": { "distance": 100, "duration": 0.4 }
+        }
+      },
+      "retina_detect": true
+    });
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.pageYOffset > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+      const animatedElements = document.querySelectorAll('.animate');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      animatedElements.forEach(el => {
+        observer.observe(el);
+      });
+    });
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('h4');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+    setTimeout(() => {
+      const cutscene = document.getElementById('cutscene');
+      if(cutscene) { cutscene.classList.add('fade-out'); }
+    }, 3000);
+    setTimeout(() => {
+      const cutscene = document.getElementById('cutscene');
+      if(cutscene) { cutscene.style.display = 'none'; }
+    }, 4000);
+  </script>
+</body>
+</html>
